@@ -1,6 +1,8 @@
 from flask import Flask, request, Response
 
-import addition, json
+import json
+
+from functions import extractData, buildResults
 
 app = Flask(__name__)
 
@@ -8,92 +10,27 @@ app = Flask(__name__)
 
 def main():
 
-    #change as needed
-    params = 5
-
-    r = {
-        "error": False,
-        "data": {},
-        "score": 0
+    results = {
+        "error": True
     }
 
-    # e = False
-    # s = 400
-    # reply = ''
+    try:
+        extractedData = extractData(request.args)
+        results = buildResults(extractedData)
+    except Exception:
+        results.message = "An exception was thrown in the Python functions"
 
-    # rx = request.args.get('x')
-    # ry = request.args.get('y')
-
-    for id in range(1, params+1):
-        item = request.args.get('item_'+str(id))
-        attendance = request.args.get('attendance_'+str(id))
-        r['data'][item] = int(attendance)
-
-    print(r['data'])
-
-    a_lec = 33
-    a_lab = 22
-    a_sup = 44
-    a_can = 55
-    w_lec = 0.3
-    w_lab = 0.4
-    w_sup = 0.15
-    w_can = 0.15
-
-    r['score'] = (
-        r['data']['Lecture sessions'] * w_lec / a_lec +
-        r['data']['Lab sessions'] * w_lab / a_lab +
-        r['data']['Support sessions'] * w_sup / a_sup +
-        r['data']['Canvas activities'] * w_can / a_can        
-    )
+    print(results)
 
     s = 200
 
-    # try:
-    #     try:
-    #         x = int(rx)
-    #     except TypeError:
-    #         r = r+"X value is missing. "
-    #         e = True
-    #     except ValueError:
-    #         r = r+"X must be an integer. " 
-    #         e = True
+    results = json.dumps(results)
 
-    #     try:        
-    #         y = int(ry)
-    #     except TypeError:
-    #         r = r+"Y value is missing. "
-    #         e = True
-    #     except ValueError:
-    #         r = r+"Y must be an integer. "
-    #         e = True
+    res = Response(response=results, status=s, mimetype='application/json')
+    res.headers["Content-Type"]="application/json"
+    res.headers["Access-Control-Allow-Origin"]="*"
 
-    #     if e:
-    #         raise Exception(r)
-
-    #     z = addition.add(x,y)
-    #     r = {
-    #         "string": rx+" + "+ry+" = "+str(z),
-    #         "x": x,
-    #         "y": y,
-    #         "answer": z
-    #     }
-    #     s = 200
-
-    # except Exception:
-    #     r = {
-    #         "message": r
-    #     }
-
-    # r["error"] = e
-
-    reply = json.dumps(r)
-
-    response = Response(response=reply, status=s, mimetype='application/json')
-    response.headers["Content-Type"]="application/json"
-    response.headers["Access-Control-Allow-Origin"]="*"
-
-    return response
+    return res
 
 if __name__ == '__main__':
 

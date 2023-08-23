@@ -5,6 +5,8 @@ test:
   script:
     - apt-get update -qy
     - apt-get install -y python3 python3-pip
+    - pip install -r requirement.txt
     - cd src
-    - python3 -m unittest  test
+    #- flake8 --statistics ## if I'm feeling nasty
+    - pytest -v --cov
 
