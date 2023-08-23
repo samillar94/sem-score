@@ -81,4 +81,6 @@ def buildResults(extractedData):
     for id in range(1, extractedData.count+1):
         results.data.score += extractedData.attendances[id] * extractedData.weights[id] / extractedData.availabilities[id]
 
+    results.lines = f"Engagement Score: {round(results.data.score)}"
+
     return results

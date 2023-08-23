@@ -1,5 +1,5 @@
 import unittest
-from functions import extractData, buildResponse
+from functions import extractData, buildResults
 
 class TestExtractData(unittest.TestCase):
     extractDataSuites = {
@@ -14,15 +14,15 @@ class TestExtractData(unittest.TestCase):
                     "availability_2": 22,
                     "availability_3": 44,
                     "availability_4": 55,
-                    "unit_1": "hours",
-                    "unit_2": "hours",
-                    "unit_3": "hours",
-                    "unit_4": "hours"     
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.15     
                 },
                 {
                     "attendances": [0, 1, 10, 55],
                     "availabilities": [33, 22, 44, 55],
-                    "unit": "hours"
+                    "weights": [0.3, 0.4, 0.15, 0.15]
                 }   
             ],
             # Other valid test cases...
@@ -36,10 +36,10 @@ class TestExtractData(unittest.TestCase):
                     "availability_2": 22,
                     "availability_3": 44,
                     "availability_4": 9,
-                    "unit_1": "hours",
-                    "unit_2": "hours",
-                    "unit_3": "hours",
-                    "unit_4": "hours"     
+                    "weight_1": 0.25,
+                    "weight_2": 0.25,
+                    "weight_3": 0.25,
+                    "weight_4": 0.25     
                 }   
             ],
             # Other diffCounts test cases...
