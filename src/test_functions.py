@@ -20,8 +20,8 @@ class TestExtractData(unittest.TestCase):
                     "weight_4": 0.15     
                 },
                 {
-                    "attendances": [0, 1, 10, 55],
-                    "availabilities": [33, 22, 44, 55],
+                    "attendances": [0.0, 1.0, 10.0, 55.0],
+                    "availabilities": [33.0, 22.0, 44.0, 55.0],
                     "weights": [0.3, 0.4, 0.15, 0.15]
                 }   
             ],
