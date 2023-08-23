@@ -9,7 +9,7 @@ def extractData(query):
         "weights": []
     }
 
-    extractedData.count = len(query)
+    extractedData['count'] = len(query)
 
     hasNext = True
 
@@ -22,7 +22,7 @@ def extractData(query):
     
     nextID = 2
 
-    while nextID <= extractedData.count // 3 + 1 and hasNext is True:
+    while nextID <= extractedData['count'] // 3 + 1 and hasNext is True:
 
         attFloat = float(att) if att is not None else None
         avFloat = float(av) if av is not None else None
@@ -78,9 +78,9 @@ def buildResults(extractedData):
         "lines": []
     }
 
-    for id in range(1, extractedData.count+1):
-        results.data.score += extractedData.attendances[id] * extractedData.weights[id] / extractedData.availabilities[id]
+    for id in range(1, extractedData['count']+1):
+        results['data']['score'] += extractedData['attendances'][id] * extractedData['weights'][id] / extractedData['availabilities'][id]
 
-    results.lines = f"Engagement Score: {round(results.data.score)}"
+    results['lines'] = f"Engagement Score: {round(results['data']['score'])}"
 
     return results

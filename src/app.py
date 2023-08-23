@@ -18,7 +18,7 @@ def main():
         extractedData = extractData(request.args)
         results = buildResults(extractedData)
     except Exception:
-        results.message = "An exception was thrown in the Python functions"
+        results['message'] = "An exception was thrown in the Python functions"
 
     print(results)
 
