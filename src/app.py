@@ -16,9 +16,13 @@ def main():
 
     try:
         extractedData = extractData(request.args)
+    except Exception as e:
+        results['message'] =f"An exception was thrown in extractData: {e}"
+
+    try:
         results = buildResults(extractedData)
-    except Exception:
-        results['message'] = "An exception was thrown in the Python functions"
+    except Exception as e:
+        results['message'] = f"An exception was thrown in buildResults: {e}"
 
     print(results)
 

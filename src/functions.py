@@ -77,9 +77,9 @@ def buildResults(extractedData):
         "lines": []
     }
 
-    for id in range(1, len(extractedData['weights'])+1):
-        results['data']['score'] += extractedData['attendances'][id] * extractedData['weights'][id] / extractedData['availabilities'][id]
+    for index in range(len(extractedData['weights'])):
+        results['data']['score'] += extractedData['attendances'][index] * extractedData['weights'][index] / extractedData['availabilities'][index]
 
-    results['lines'] = f"Engagement Score: {round(results['data']['score'])}"
+    results['lines'] = [f"Engagement Score: {round(100*results['data']['score'])}%"]
 
     return results
