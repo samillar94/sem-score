@@ -146,10 +146,10 @@ class TestExtractData(unittest.TestCase):
                                 {
                     "error": False,
                     "data": {
-                        "score": 0.0
+                        "score": 1.0
                     },
                     "lines": [
-                        "Engagement Score: 0%"
+                        "Engagement Score: 100%"
                     ]
                 }   
             ],
