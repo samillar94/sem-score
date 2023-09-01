@@ -83,7 +83,102 @@ class TestExtractData(unittest.TestCase):
                     "weight_4": 0.25     
                 }   
             ],
-            # Other diffCounts test cases...
+            [
+                {
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": 44,
+                    "attendance_4": 55,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.15    
+                }
+            ],
+            [
+                {
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": 44,
+                    "attendance_4": 55,
+                    "availability_1": 33,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "availability_4": 55,
+                    "weight_1": 0.3,
+                }
+            ]
+        ],
+        "negative": [
+            [
+                {
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": -44,
+                    "attendance_4": 55,
+                    "availability_1": 33,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "availability_4": 55,
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.15   
+                }
+            ]
+        ],
+        "high": [
+[{
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": 444,
+                    "attendance_4": 55,
+                    "availability_1": 33,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "availability_4": 55,
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.15 
+}]
+
+        ],
+        "nonUnitary": [
+            [
+                {
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": 44,
+                    "attendance_4": 55,
+                    "availability_1": 33,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "availability_4": 55,
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.8     
+                }
+            ],
+            [
+                {
+                    "attendance_1": 33,
+                    "attendance_2": 22,
+                    "attendance_3": 44,
+                    "attendance_4": 55,
+                    "availability_1": 33,
+                    "availability_2": 22,
+                    "availability_3": 44,
+                    "availability_4": 55,
+                    "weight_1": 0.3,
+                    "weight_2": 0.4,
+                    "weight_3": 0.15,
+                    "weight_4": 0.1     
+                },
+            ]
         ]
     }
 
@@ -163,6 +258,30 @@ class TestExtractData(unittest.TestCase):
 
     def test_diffCounts_extractData(self):
         for index, input_data in enumerate(self.extractDataSuites["diffCounts"], start=1):
+            with self.subTest(msg=f'Test case {index}'):
+                with self.assertRaises(Exception):
+                    extractData(input_data)
+
+    def test_nonNumeric_extractData(self):
+        for index, input_data in enumerate(self.extractDataSuites["nonNumeric"], start=1):
+            with self.subTest(msg=f'Test case {index}'):
+                with self.assertRaises(Exception):
+                    extractData(input_data)
+
+    def test_negative_extractData(self):
+        for index, input_data in enumerate(self.extractDataSuites["negative"], start=1):
+            with self.subTest(msg=f'Test case {index}'):
+                with self.assertRaises(Exception):
+                    extractData(input_data)
+
+    def test_high_extractData(self):
+        for index, input_data in enumerate(self.extractDataSuites["high"], start=1):
+            with self.subTest(msg=f'Test case {index}'):
+                with self.assertRaises(Exception):
+                    extractData(input_data)
+
+    def test_nonUnitary_extractData(self):
+        for index, input_data in enumerate(self.extractDataSuites["nonUnitary"], start=1):
             with self.subTest(msg=f'Test case {index}'):
                 with self.assertRaises(Exception):
                     extractData(input_data)
